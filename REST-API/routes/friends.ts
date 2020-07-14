@@ -5,7 +5,7 @@ import {
   getFriendById,
   updateFriend,
   deleteFriend,
-} from "./friends.ts";
+} from "../controllers/friends.ts";
 const router = new Router();
 
 router

@@ -1,4 +1,4 @@
-import { Friend } from "./Friend.ts";
+import { Friend } from "../model/friend.ts";
 
 let friends: Friend[] = [
   {
