@@ -1,4 +1,3 @@
-import { v4 } from "https://deno.land/std/uuid/mod.ts";
 import { Friend } from "./Friend.ts";
 
 let friends: Friend[] = [
@@ -169,13 +168,19 @@ const updateFriend = async ({
   }
 };
 
-const deleteFriend = ({params, response }: { params: { id: string };response: any }) => {
-    friends = friends.filter(p => p.id !== params.id)
-    response.status = 404;
-    response.body = {
-      success: true,
-      msg: "Friend Deleted",
-    };
+const deleteFriend = ({
+  params,
+  response,
+}: {
+  params: { id: string };
+  response: any;
+}) => {
+  friends = friends.filter((p) => p.id !== params.id);
+  response.status = 404;
+  response.body = {
+    success: true,
+    msg: "Friend Deleted",
+  };
 };
 
 export { getAllFriends, addFriend, getFriendById, updateFriend, deleteFriend };
