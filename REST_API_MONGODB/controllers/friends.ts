@@ -1,7 +1,6 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
-import db from "../database/friend.ts";
+import friendsCollections from "../database/friend.ts";
 
-const friendsCollections = db.collection("friends_info");
 
 const getAllFriends = async (ctx: RouterContext) => {
   const friends = await friendsCollections.find();
