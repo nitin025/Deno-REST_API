@@ -36,12 +36,14 @@ const addFriend = async ({
     response.body = { error: "No data available" };
     return;
   }
-  const value = await request.body();
+  const {
+    value: { first_name, last_name, place, dob, in_relationship },
+  } = await request.body();
 
-  const id = await friendsCollections.insertOne(value.first_name);
+  const id = await friendsCollections.insertOne({first_name, last_name, place, dob, in_relationship});
 
   response.status = 200;
-  response.body = value;
+  response.body = id;
 };
 
 const getFriendById = async (ctx: any) => {
@@ -50,7 +52,7 @@ const getFriendById = async (ctx: any) => {
   });
   if (!data) {
     ctx.response.status = 400;
-    ctx.response.body = { msg: "You dont have any friend with given id" };
+    ctx.response.body = { msg: "You dont have any friend with such id" };
     return;
   }
   ctx.response.status = 200;
@@ -58,7 +60,6 @@ const getFriendById = async (ctx: any) => {
 };
 
 const updateFriend = async (ctx: any) => {
-  //const { value } = await ctx.request.body();
 
   await friendsCollections.updateOne(
     { _id: { $oid: ctx.params.id } },
